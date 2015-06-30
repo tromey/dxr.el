@@ -8,6 +8,20 @@
   (require 'thingatpt)
   (require 'browse-url))
 
+;; Copied from Emacs 25.
+(unless (fboundp 'vc-root-dir)
+  (defun vc-root-dir ()
+    "Return the root directory for the current VC tree.
+Return nil if the root directory cannot be identified."
+    (let ((backend (vc-deduce-backend)))
+      (if backend
+	  (condition-case err
+	      (vc-call-backend backend 'root default-directory)
+	    (vc-not-supported
+	     (unless (eq (cadr err) 'root)
+	       (signal (car err) (cdr err)))
+	     nil))))))
+
 (defvar dxr-server "http://dxr.mozilla.org/"
   "The DXR server to use.")
 
