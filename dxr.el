@@ -10,6 +10,7 @@
 
 ;; Copied from Emacs 25.
 (unless (fboundp 'vc-root-dir)
+  (require 'vc)
   (defun vc-root-dir ()
     "Return the root directory for the current VC tree.
 Return nil if the root directory cannot be identified."
