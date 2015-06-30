@@ -54,10 +54,11 @@ The results can be stepped through using `next-error'."
   (interactive (list
 		(read-string (concat "Run dxr (with args): ")
 			     (thing-at-point 'symbol))))
-  (let ((compile-command nil)
-	;; It's nicer to start at the VC root.
-	(compilation-directory (or (vc-root-dir)
-				   default-directory)))
+  (let* ((compile-command nil)
+	 ;; It's nicer to start at the VC root.
+	 (compilation-directory (or (vc-root-dir)
+				    default-directory))
+	 (default-directory compilation-directory))
     (compilation-start (concat dxr-cmd
 			       " --grep --no-highlight"
 			       " --server=" dxr-server
