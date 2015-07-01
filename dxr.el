@@ -8,6 +8,8 @@
   (require 'thingatpt)
   (require 'browse-url))
 
+(declare-function vc-deduce-backend "vc.el")
+
 ;; Copied from Emacs 25.
 (unless (fboundp 'vc-root-dir)
   (require 'vc)
