@@ -35,7 +35,7 @@ Return nil if the root directory cannot be identified."
 (defvar dxr-cmd "dxr"
   "The local DXR command to invoke.")
 
-(defun dxr-url-representing-point ()
+(defun dxr--url-representing-point ()
   (unless (buffer-file-name)
     (error "Buffer is not visiting a file"))
   (let ((root (or (vc-root-dir)
@@ -53,14 +53,14 @@ Return nil if the root directory cannot be identified."
 This uses `dxr-base-url' to find the DXR server, and `browse-url'
 to open the page in the browser."
   (interactive)
-  (browse-url (dxr-url-representing-point)))
+  (browse-url (dxr--url-representing-point)))
 
 ;;;###autoload
 (defun dxr-kill-ring-save ()
   "Save a DXR URL for the source at point in the kill ring.
 This uses `dxr-base-url' to find the DXR server."
   (interactive)
-  (kill-new (dxr-url-representing-point)))
+  (kill-new (dxr--url-representing-point)))
 
 ;;;###autoload
 (defun dxr (args)
