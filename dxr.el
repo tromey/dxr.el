@@ -50,7 +50,7 @@ Return nil if the root directory cannot be identified."
 ;;;###autoload
 (defun dxr-browse-url ()
   "Open a DXR page for the source at point in a web browser.
-This uses `dxr-base-url' to find the DXR server, and `browse-url'
+This uses `dxr-server' and `dxr-tree' to compute the URL, and `browse-url'
 to open the page in the browser."
   (interactive)
   (browse-url (dxr--url-representing-point)))
@@ -58,7 +58,7 @@ to open the page in the browser."
 ;;;###autoload
 (defun dxr-kill-ring-save ()
   "Save a DXR URL for the source at point in the kill ring.
-This uses `dxr-base-url' to find the DXR server."
+This uses `dxr-server' and `dxr-tree' to compute the URL."
   (interactive)
   (kill-new (dxr--url-representing-point)))
 
