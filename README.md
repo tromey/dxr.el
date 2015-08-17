@@ -1,9 +1,6 @@
 This is a simple Emacs interface to [DXR](http://dxr.mozilla.org/).
-
-It currently relies on a version of
-[dxr-cmd](https://github.com/Osmose/dxr-cmd) that has the `--grep`
-option.  Install this and put it in your `$PATH`, or set `dxr-cmd` in
-Emacs.
+While earlier versions relied on a separate `dxr` executable, this
+version is standalone.
 
 There are three main ways to use `dxr.el`:
 
@@ -14,8 +11,7 @@ There are three main ways to use `dxr.el`:
   the URL, copies it to the kill ring.
 
 * `dxr`.  This runs a DXR query and puts the results into a
-  `*compilation*` buffer.
-
+  `*grep*`-like buffer.
 
 You can install this by checking it out, opening `dxr.el`, and then
 running `M-x package-install-from-buffer`.  I will try to get it into
