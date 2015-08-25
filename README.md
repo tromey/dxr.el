@@ -14,4 +14,5 @@ There are three main ways to use `dxr.el`:
   `*grep*`-like buffer.
 
 You can install this by checking it out, opening `dxr.el`, and then
-running `M-x package-install-from-buffer`.
+running `M-x package-install-from-buffer`.  It is also available in
+[Marmalade](https://marmalade-repo.org/).
