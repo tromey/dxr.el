@@ -1,7 +1,26 @@
 ;;; dxr.el --- Convenient access to a DXR server -*-lexical-binding:t-*-
 
 ;; Author: Tom Tromey <tom@tromey.com>
-;; Version: 2.0
+;; Version: 2.1
+;; URL: https://github.com/tromey/dxr.el
+;; Keywords: comm, tools, matching, mozilla
+
+;;; Commentary:
+
+;; This is a simple Emacs interface to DXR (http://dxr.mozilla.org/).
+
+;; There are three main ways to use this package:
+
+;; * `dxr-browse-url'.  This opens a DXR page for the current file and
+;;   line in a browser window.
+
+;; * `dxr-kill-ring-save'.  Like `dxr-browse-url', but instead of opening
+;;   the URL, copies it to the kill ring.
+
+;; * `dxr'.  This runs a DXR query and puts the results into a
+;;   `*grep*'-like buffer.
+
+;;; Code:
 
 (require 'compile)
 (require 'grep)
