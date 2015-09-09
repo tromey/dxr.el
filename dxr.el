@@ -1,7 +1,7 @@
 ;;; dxr.el --- Convenient access to a DXR server -*-lexical-binding:t-*-
 
 ;; Author: Tom Tromey <tom@tromey.com>
-;; Version: 2.1
+;; Version: 2.2
 ;; URL: https://github.com/tromey/dxr.el
 ;; Keywords: comm, tools, matching, mozilla
 
@@ -25,6 +25,7 @@
 (require 'compile)
 (require 'grep)
 (require 'json)
+(require 'mm-url)
 (eval-when-compile
   (require 'browse-url)
   (require 'thingatpt)
@@ -178,6 +179,9 @@ QUERY is the query string to use."
 			       		   'font-lock-face grep-match-face))
 			     line nil t)
 			    "\n")))))
+		   ;; DXR output has HTML entities in the strings, so
+		   ;; decode them all now.
+		   (mm-url-decode-entities)
 		   (goto-char (point-min))))))
 	   ;; Kill the http results.  Comment this out if you need to
 	   ;; debug the transfer.
