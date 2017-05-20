@@ -59,12 +59,6 @@ This must end in a `/'.")
 (defvar dxr-limit 100
   "Maximum number of responses to return.")
 
-;; It would be nice not to have to use the command, but this would
-;; mean writing our own thing like compilation-mode and (the easy
-;; part) interfacing to next-error.
-(defvar dxr-cmd "dxr"
-  "The local DXR command to invoke.")
-
 (defun dxr--url-representing-point ()
   (unless (buffer-file-name)
     (error "Buffer is not visiting a file"))
