@@ -1,7 +1,7 @@
 ;;; dxr.el --- Convenient access to a DXR server -*-lexical-binding:t-*-
 
 ;; Author: Tom Tromey <tom@tromey.com>
-;; Version: 2.2
+;; Version: 2.3
 ;; URL: https://github.com/tromey/dxr.el
 ;; Keywords: comm, tools, matching, mozilla
 
