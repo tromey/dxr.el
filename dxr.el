@@ -68,14 +68,40 @@ This must end in a `/'.")
 (defun dxr--url-representing-point ()
   (unless (buffer-file-name)
     (error "Buffer is not visiting a file"))
-  (let ((root (or (vc-root-dir)
-		  (error "Could not find VC root directory"))))
-    (concat dxr-server
-	    dxr-tree
-	    "/source/"
-	    (file-relative-name (buffer-file-name) root)
-	    "#"
-	    (int-to-string (line-number-at-pos)))))
+  (let* ((root (or (vc-root-dir)
+		  (error "Could not find VC root directory")))
+	 (start (if (region-active-p)
+		    (region-beginning)
+		  (point)))
+	 (end (if (region-active-p)
+		  (region-end)
+		nil)))
+    ;; If the region ends at the start of a line, then just leave it
+    ;; as-is.  But if the region ends mid-line, move it to the next
+    ;; line.  This will make the results a little nicer.
+    (when end
+      (save-excursion
+	(goto-char end)
+	(when (not (bolp))
+	  (forward-line)
+	  (setf end (point)))))
+    (let ((start-line (line-number-at-pos start))
+	  ;; Use 1- here because we want to handle the bolp case
+	  ;; specially.
+	  (end-line (if end (1- (line-number-at-pos end)))))
+      ;; If start and end are the same, don't make a region.
+      (when (<= end-line start-line)
+	(setf end-line nil))
+      (concat dxr-server
+	      dxr-tree
+	      "/source/"
+	      (file-relative-name (buffer-file-name) root)
+	      "#"
+	      (int-to-string start-line)
+	      (if end-line "-" "")
+	      (if end-line
+		  (int-to-string end-line)
+		"")))))
 
 ;;;###autoload
 (defun dxr-browse-url ()
@@ -90,7 +116,9 @@ to open the page in the browser."
   "Save a DXR URL for the source at point in the kill ring.
 This uses `dxr-server' and `dxr-tree' to compute the URL."
   (interactive)
-  (kill-new (dxr--url-representing-point)))
+  (let ((url (dxr--url-representing-point)))
+    (kill-new url)
+    (message "%s" url)))
 
 (defun dxr--create-query-url (query)
   "Given QUERY, a string, create and return a DXR query URL."
