@@ -1,7 +1,7 @@
 ;;; dxr.el --- Convenient access to a DXR server -*-lexical-binding:t-*-
 
 ;; Author: Tom Tromey <tom@tromey.com>
-;; Version: 2.3
+;; Version: 2.4
 ;; URL: https://github.com/tromey/dxr.el
 ;; Keywords: comm, tools, matching, mozilla
 
@@ -90,7 +90,7 @@ This must end in a `/'.")
 	  ;; specially.
 	  (end-line (if end (1- (line-number-at-pos end)))))
       ;; If start and end are the same, don't make a region.
-      (when (<= end-line start-line)
+      (when (and end-line (<= end-line start-line))
 	(setf end-line nil))
       (concat dxr-server
 	      dxr-tree
